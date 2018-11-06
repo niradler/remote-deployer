@@ -44,9 +44,7 @@ const status = async() => {
     let statusSummary = null;
     try {
         statusSummary = await git.status();
-        console.log("statusSummary", statusSummary)
     } catch (e) {
-        console.log(e)
         throw new Error(e.message)
     }
 

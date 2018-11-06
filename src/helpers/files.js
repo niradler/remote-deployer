@@ -15,7 +15,13 @@ const directoryExists = (filePath) => {
     }
 }
 
+const fileToArr =(path) =>{
+    const file = fs.readFileSync(path, 'utf8');
+    return file.split('\n').filter(l => l.charAt(0) !== '#' && l.charAt(0) !== '\r')
+}
+
 module.exports = {
+    fileToArr,
     getCurrentDirectoryBase,
     directoryExists
 };

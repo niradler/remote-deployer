@@ -1,6 +1,5 @@
 const Configstore = require('configstore');
-const pkg = require('../../../package.json');
-const config = new Configstore(pkg.name);
+const config = new Configstore('remote-deployer');
 
 module.exports = {
     setKey: (key, value) => config.set(key, value),
@@ -9,7 +8,7 @@ module.exports = {
     has: (key) => config.has(key),
     delete: (key) => config.delete(key),
     clear: () => config.clear(),
-    path: () => config.path(),
+    path: () => config.path,
     all: () => config.all(),
     size: () => config.size()
 }
