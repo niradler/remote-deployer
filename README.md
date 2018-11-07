@@ -19,9 +19,9 @@ npm i -g remote-deployer
 
 ### API
 
-- deployer -h //show help file
-- deployer ssh //show sub help file
-- deployer init
+- ```deployer -h //show help file```
+- ```deployer ssh -h //show sub help file```
+- ```deployer init```
 
 ### Notes
 
