@@ -7,7 +7,7 @@
 - deploy with ftp: coming soon.
 
 ***
- used by me at [devresources](https://devresources.site/);
+ Used by me at [devresources](https://devresources.site/), 
  helping me to setup ci/cd with gitlab worker.
 ***
 
@@ -27,7 +27,7 @@ npm i -g remote-deployer
 
 - to support multi configuration, you need to make sure the default_id key in the config is not set. (you need to run the commands in the project folder)
 - to support running deployer from anywhere but support only one configuration make sure default_id is set.
-- get config file path: deployer config path
+- get config file path: ```deployer config path```
 - print config file: ```deployer config all```
 
 ### TODO
