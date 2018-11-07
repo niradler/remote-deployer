@@ -1,7 +1,7 @@
 {
   "name": "remote-deployer",
   "author": "Nir Adler",
-  "version": "0.0.2",
+  "version": "0.2.0",
   "description": "A tool to run scripts on a remote server.",
   "main": "src/index.js",
   "repository": "niradler/deployer",
@@ -19,8 +19,8 @@
     "/bin",
     "/src"
   ],
-  "bugs": "https://github.com/niradler/deployer/issues",
-  "homepage": "https://github.com/niradler/deployer",
+  "bugs": "https://github.com/niradler/remote-deployer/issues",
+  "homepage": "https://github.com/niradler/remote-deployer",
   "keywords": [
     "remote-deployer",
     "deployer",

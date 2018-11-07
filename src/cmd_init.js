@@ -10,9 +10,10 @@ const run = async(force) => {
     try {
         //----------- welcome and init git 
         cli.startup();
+        let answer = null;
         const isGit = await git.isThisAgitRepo();
         if (!isGit) {
-            const answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm')
+             answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm');
             if (answer.value) {
                 const created = await git.init();
                 if (created) {
@@ -27,9 +28,12 @@ const run = async(force) => {
         cli.log(`Current branch #${git_status.current}`,'yellow');
         cli.log('config path: ' + config.path(),'gray')
         //-----------
-
+         answer = await inquirer.simpleInquirer('Should we create a default key for you (if yes will allow only one configuration)?', 'confirm');
+        if (answer.value) {
+            cli.log('key created: ' + store.setDefault(),'green');
+        }
         // new deploy process
-        const answer = await inquirer.how_to_deploy();
+         answer = await inquirer.how_to_deploy();
         if(answer.method === 'ssh'){
             // are you on the client ?
             await store.getSSHConnection(force);

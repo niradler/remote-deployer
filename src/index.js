@@ -114,7 +114,7 @@ program
                 break;
                 case 'default':
                 console.log(store.setDefault());
-                cli.log('Deployer support multi project work, by working in project directory,\nwhen setting default key you can interact with deployer anyware but only for one project!','red');
+                cli.log('Deployer support multi project work, by working in project directory,\nwhen setting default key you can interact with deployer anywhere but only for one project!','red');
                 cli.log('You can always clear, to undo.','yellow')
                     break;
             default:
@@ -146,3 +146,7 @@ program.on('--help', function () {
 });
 
 program.parse(process.argv);
+
+if (process.argv.length < 3) {
+    program.help()
+  }
