@@ -1,71 +1,118 @@
 #!/usr/bin/env node
 
 const cli = require('./helpers/cli');
-const git = require('./helpers/git');
-const inquirer = require('./helpers/inquirer');
-const ssh = require('./helpers/ssh');
-const store = require('./helpers/store');
-const config = require('./helpers/config');
-const run = async() => {
-    try {
-        //----------- welcome and init git 
-        cli.startup();
-        const isGit = await git.isThisAgitRepo();
-        if (!isGit) {
-            const answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm')
-            if (answer.value) {
-                const created = await git.init();
-                if (created) {
-                    cli.log('Git repository was initialize.','green');
-                }
-            }else{
-                process.exit();
-            }
-        }
-        const git_status = await git.status();
-        cli.log(`Current branch #${git_status.current}`,'yellow');
-        cli.log('config path: ' + config.path(),'gray')
-        //-----------
+const program = require('commander');
 
-        // new deploy process
-        const answer = await inquirer.how_to_deploy();
-        if(answer.method === 'ssh'){
-            // are you on the client ?
-            await store.getSSHConnection();
-            await ssh.test_conn();
-            await store.getDeployScriptPath();
-            cli.log('Deployment with ssh is configured!','green');
-        }else if(answer.method === 'http') {
-            // are you on the server ?
-            await store.getHTTPConfig();
-            cli.log('Deployment with http is configured!','green');
-        }
 
-//deployer init
+program
+.command('init')
+.option('-f, --force', 'Force override')
+.description('Initialise deployer configuration.')
+.action(function ( cmd) {
+  console.log('init ' + (cmd.force ? ' override' : ''))
+}).on('--help', function(){
+    console.log('')
+    console.log('API Usage:');
+    console.log('  $ deployer init [-f]');
+    console.log('')
+  });
 
-//deployer http start
-//deployer http stop
-//deployer http config
-//deployer http configure
-
-//deployer ssh play
-//deployer ssh test
-//deployer ssh deploy
-//deployer ssh configure
-
-//deployer config path
-//deployer config all
-//deployer config clear
-
-    //    await ssh.deploy();
-
-        // console.log(answer.method)
-        process.exit();
-    } catch (e) {
-        console.error(e)
-        process.exit(1);
+program
+  .command('http <option>')
+  .description('HTTP deployment, for running on the remote server.')
+  .action(function (opt, cmd) {  
+    switch (opt) {
+        case start:
+            
+            break;
+            case stop:
+            
+            break;
+            case config:
+            
+            break;
+            case configure:
+            
+            break;
+        default:
+        cli.log('http option not found.','red')
+            break;
     }
+  }).on('--help', function(){
+    console.log('')
+    console.log('API Usage:');
+    console.log('  $ deployer http start');
+    console.log('  $ deployer http stop');
+    console.log('  $ deployer http config');
+    console.log('  $ deployer http configure');
+    console.log('  $ deployer http start');
+    console.log('')
+  });
 
-}
+  program
+  .command('ssh <option>')
+  .description('SSH deployment, for running on the client or build server.')
+  .action(function (opt, cmd) {  
+    switch (opt) {
+        case play:
+            
+            break;
+            case test:
+            
+            break;
+            case deploy:
+            
+            break;
+            case configure:
+            
+            break;
+        default:
+        cli.log('ssh option not found.','red')
+            break;
+    }
+  }).on('--help', function(){
+    console.log('')
+    console.log('API Usage:');
+    console.log('  $ deployer ssh play');
+    console.log('  $ deployer ssh deploy');
+    console.log('  $ deployer ssh test');
+    console.log('  $ deployer ssh config');
+    console.log('  $ deployer ssh configure');
+    console.log('')
+  });
 
-run();
+  program
+  .command('config <option>')
+  .description('Interact with deployer config file.')
+  .action(function (opt, cmd) {  
+    switch (opt) {
+        case path:
+            
+            break;
+            case test:
+            
+            break;
+            case all:
+            
+            break;
+            case clear:
+            
+            break;
+        default:
+        cli.log('config option not found.','red')
+            break;
+    }
+  });
+
+  program.on('--help', function(){
+    console.log('')
+    console.log('For API Specific:');
+    console.log('')
+    console.log('HTTP:');
+    console.log('  $ deployer http -h');
+    console.log('')
+    console.log('SSH:');
+    console.log('  $ deployer ssh -h');
+  });
+
+program.parse(process.argv);
