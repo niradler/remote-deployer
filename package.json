@@ -1,18 +1,32 @@
 {
   "name": "remote-deployer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "author": "Nir Adler",
+  "version": "0.0.2",
+  "description": "A tool to run scripts on a remote server.",
+  "main": "src/index.js",
+  "repository": "niradler/deployer",
   "scripts": {
     "start": "node ./src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "bin": {
     "deployer": "./src/index.js"
   },
-  "keywords": [],
-  "author": "Nir Adler",
-  "license": "ISC",
+  "files": [
+    "/bin",
+    "/src"
+  ],
+  "homepage": "https://github.com/niradler/deployer",
+  "keywords": [
+    "remote-deployer",
+    "deployer",
+    "ssh",
+    "deploy"
+  ],
+  "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
     "clear": "^0.1.0",
