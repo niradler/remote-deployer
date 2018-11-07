@@ -19,6 +19,7 @@
     "/bin",
     "/src"
   ],
+  "bugs": "https://github.com/niradler/deployer/issues",
   "homepage": "https://github.com/niradler/deployer",
   "keywords": [
     "remote-deployer",
