@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const files = require('./files');
-// const git = require('simple-git');
 const gitP = require('simple-git/promise');
 const gitS = require('simple-git')();
 const git = gitP(__dirname);
