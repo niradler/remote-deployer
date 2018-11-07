@@ -21,6 +21,14 @@ const isThisAgitRepo = async() => {
     return false;
 }
 
+const lastCommit = async() => {
+    try {
+       const comm =  await git.log(); // ['-n1 --format=format:"%H"']
+        return comm.latest;
+    } catch (err) {
+        throw err;
+    }
+}
 const init = async() => {
     try {
 
@@ -52,6 +60,7 @@ const status = async() => {
 }
 
 module.exports = {
+    lastCommit,
     isThisAgitRepo,
     init,
     status

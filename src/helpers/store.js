@@ -2,12 +2,26 @@ const crypto = require('crypto');
 const files = require('./files')
 const config = require('./config')
 const inquirer = require('./inquirer')
-
-const getId = () => crypto
+const git = require('./git')
+const getId = () => {
+    const def_key = config.get('default_id');
+     return def_key ? def_key : crypto
     .createHash('md5')
     .update(files.getCurrentDirectoryBase())
     .digest("hex");
-
+}
+const setDefault = () => {
+    let def_key =  config.get('default_id');
+    if(!def_key) {
+        def_key = crypto
+        .createHash('md5')
+        .update(files.getCurrentDirectoryBase())
+        .digest("hex");
+    } 
+    config.setKey('default_id',def_key);
+     return def_key;
+}
+    
 const getSSHConnection = async(isNew = false) => {
     const id = getId();
     let conn = isNew ? null : config.get(id + '.ssh_con');
@@ -42,7 +56,24 @@ const getHTTPConfig = async (isNew = false)=>{
     }
     return conf;
 }
+
+const addDeploy = async ()=>{
+
+    const id = getId();
+    let conf = {
+        branch: (await git.status()).current,
+        commit: await git.lastCommit(),
+        date: new Date()
+    }
+        config.setKey(id + '.deployment.last', config.get(id + '.deployment.current'));
+        config.setKey(id + '.deployment.current', conf);
+
+    return conf;
+}
+
 module.exports = {
+    setDefault,
+    addDeploy,
     getId,
     getSSHConnection,
     getDeployScriptPath,
