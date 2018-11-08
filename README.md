@@ -27,6 +27,7 @@ npm i -g remote-deployer
 
 - to support multi configuration, you need to make sure the default_id key in the config is not set. (you need to run the commands in the project folder)
 - to support running deployer from anywhere but support only one configuration make sure default_id is set.
+- on linux and mac, make sure the script as permission, ```chmod +x script.sh```
 - get config file path: ```deployer config path```
 - print config file: ```deployer config all```
 
