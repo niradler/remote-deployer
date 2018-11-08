@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-
+require("babel-core/register");
+require("babel-polyfill");
 const express = require('express')
 const morgan = require('morgan')
-const exec = require('child_process').exec;
 const sh = require('shelljs')
 const fs = require('fs');
 const path = require('path');
