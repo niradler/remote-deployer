@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
+const shell = require('shelljs');
+
 const cli = require('./helpers/cli');
 const git = require('./helpers/git');
 const inquirer = require('./helpers/inquirer');
 const store = require('./helpers/store');
 const config = require('./helpers/config');
-const shell = require('shelljs');
 const ns = require('./helpers/shell');
+
 const run = async(opt,force) => {
     try {
         //----------- welcome and init git 
@@ -39,7 +41,7 @@ const run = async(opt,force) => {
                 shell.exit(1)
               }
 
-             await ns.node.run('pm2 start src/server/index.js -n deployer');
+             await ns.node.run('pm2 start build/server/index.js -n deployer');
 
                 break;
             case 'stop':

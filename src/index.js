@@ -1,14 +1,17 @@
 #!/usr/bin/env node
+
 require("babel-core/register");
 require("babel-polyfill");
-const cli = require('./helpers/cli');
+
 const program = require('commander');
+const shell = require('shelljs');
+
 const cmd_init = require('./cmd_init');
 const cmd_ssh = require('./cmd_ssh');
 const cmd_http = require('./cmd_http');
 const config = require('./helpers/config');
 const store = require('./helpers/store');
-const shell = require('shelljs');
+const cli = require('./helpers/cli');
 
 if (!shell.which('npm')) {
     shell.echo('Sorry, this script requires npm')
