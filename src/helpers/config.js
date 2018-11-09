@@ -9,6 +9,6 @@ module.exports = {
     delete: (key) => config.delete(key),
     clear: () => config.clear(),
     path: () => config.path,
-    all: () => config.all(),
+    all: () => config.all,
     size: () => config.size()
 }
