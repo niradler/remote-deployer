@@ -1,13 +1,14 @@
 {
   "name": "remote-deployer",
   "author": "Nir Adler",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A tool to run scripts on a remote server.",
   "main": "build/index.js",
   "repository": "niradler/deployer",
   "scripts": {
     "start": "node ./src/index",
     "build": "babel --presets env src -d build",
+    "rollup": "./node_modules/.bin/rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
@@ -16,10 +17,6 @@
   "bin": {
     "deployer": "build/index.js"
   },
-  "files": [
-    "/bin",
-    "/src"
-  ],
   "bugs": "https://github.com/niradler/remote-deployer/issues",
   "homepage": "https://github.com/niradler/remote-deployer",
   "keywords": [
@@ -49,7 +46,10 @@
     "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/helper-module-imports": "^7.0.0",
     "babel-cli": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
