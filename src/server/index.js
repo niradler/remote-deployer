@@ -27,13 +27,6 @@ const run = async () => {
     app.get('/', async (req,res)=> {
         try {
             const script_path =await store.getDeployScriptPath();
-            // const script =  exec('sh ' + script_path,
-            // (error, stdout, stderr) => {
-            //     if (error !== null) {
-            //       throw new Error(`deployer: deployment script: ${error}`);
-            //     }
-            // });
-            // script.stdout.pipe(process.stdout);
             //windows
             sh.exec("C:\\Users\\admin\\Documents\\deploy.sh", (code, output) => {
                 sh.echo(`Deployment script exit code ${code}`);

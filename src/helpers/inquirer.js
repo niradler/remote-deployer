@@ -18,13 +18,25 @@ const askForRemoteOrigin = () => {
     return inquirer.prompt(questions);
 }
 
-const how_to_deploy= () => {
+const how_to_deploy = () => {
     const questions = [
         {
             name: 'method',
             type: 'list',
             message: 'Pick deploy method:',
-            choices:[{name:"HTTP",value:"http"}, {name:"SSH",value:"ssh"},{name:"FTP",value:"ftp",disabled:true}],
+            choices: [
+                {
+                    name: "HTTP",
+                    value: "http"
+                }, {
+                    name: "SSH",
+                    value: "ssh"
+                }, {
+                    name: "FTP",
+                    value: "ftp",
+                    disabled: true
+                }
+            ],
             validate: function (value) {
                 if (value.length) {
                     return true;
@@ -36,100 +48,106 @@ const how_to_deploy= () => {
     ];
     return inquirer.prompt(questions);
 }
-const ask_ssh_connection = async () => {
-    const questions = [
-        {
-            name: 'host',
-            type: 'input',
-            message: 'Enter your server host:',
-            validate: function (value) {
-                if (value.length) {
-                    return true;
-                } else {
-                    return 'Please enter your host .';
+const ask_ssh_connection = async() => {
+    try {
+        const questions = [
+            {
+                name: 'host',
+                type: 'input',
+                message: 'Enter your server host:',
+                validate: function (value) {
+                    if (value.length) {
+                        return true;
+                    } else {
+                        return 'Please enter your host .';
+                    }
                 }
-            }
-        }, 
-        {
-            name: 'port',
-            type: 'input',
-            message: 'Enter your server port:',
-            validate: function (value) {
-                if (value.length) {
-                    return true;
-                } else {
-                    return 'Please enter your username .';
+            }, {
+                name: 'port',
+                type: 'input',
+                message: 'Enter your server port:',
+                validate: function (value) {
+                    if (value.length) {
+                        return true;
+                    } else {
+                        return 'Please enter your username .';
+                    }
                 }
-            }
-        }, 
-        {
-            name: 'username',
-            type: 'input',
-            message: 'Enter your server username:',
-            validate: function (value) {
-                if (value.length) {
-                    return true;
-                } else {
-                    return 'Please enter your username .';
+            }, {
+                name: 'username',
+                type: 'input',
+                message: 'Enter your server username:',
+                validate: function (value) {
+                    if (value.length) {
+                        return true;
+                    } else {
+                        return 'Please enter your username .';
+                    }
                 }
+            }, {
+                name: 'password',
+                type: 'password',
+                message: 'Enter your password:',
+                default: undefined
+            }, {
+                name: 'privateKey',
+                type: 'input',
+                message: 'Enter your privateKey file path:'
             }
-        }, {
-            name: 'password',
-            type: 'password',
-            message: 'Enter your password:',
-            default:undefined,
-        },
-        {
-            name: 'privateKey',
-            type: 'input',
-            message: 'Enter your privateKey file path:'
-        }
-    ];
-    const answers =  await inquirer.prompt(questions);
-     return answers;
+        ];
+        const answers = await inquirer.prompt(questions);
+        return answers;
+    } catch (e) {
+        console.error(e);
+    }
 }
-const ask_http_conf = async () => {
-    const questions = [
-        {
-            name: 'port',
-            type: 'input',
-            default:"5454",
-            message: 'Enter your server port:',
-            validate: function (value) {
-                if (value.length) {
-                    return true;
-                } else {
-                    return 'Please enter your port .';
+const ask_http_conf = async() => {
+    try {
+        const questions = [
+            {
+                name: 'port',
+                type: 'input',
+                default: "5454",
+                message: 'Enter your server port:',
+                validate: function (value) {
+                    if (value.length) {
+                        return true;
+                    } else {
+                        return 'Please enter your port .';
+                    }
+                }
+            }, {
+                name: 'app_key',
+                type: 'input',
+                default: crypto
+                    .randomBytes(20)
+                    .toString('hex'),
+                message: 'Enter your your api key:',
+                validate: function (value) {
+                    if (value.length) {
+                        return true;
+                    } else {
+                        return 'Please enter your api key .';
+                    }
+                }
+            }, {
+                name: 'deploy_script',
+                type: 'input',
+                message: 'Set deploy script path:',
+                validate: function (value) {
+                    if (value.length) {
+                        return true;
+                    } else {
+                        return 'Please enter your script path .';
+                    }
                 }
             }
-        }, 
-        {
-            name: 'app_key',
-            type: 'input',
-            default:crypto.randomBytes(20).toString('hex'),
-            message: 'Enter your your api key:',
-            validate: function (value) {
-                if (value.length) {
-                    return true;
-                } else {
-                    return 'Please enter your api key .';
-                }
-            }
-        }, {
-            name: 'deploy_script',
-            type: 'input',
-            message: 'Set deploy script path:',
-            validate: function (value) {
-                if (value.length) {
-                    return true;
-                } else {
-                    return 'Please enter your script path .';
-                }
-            }
-        }
-    ];
-    const answers =  await inquirer.prompt(questions);
-     return answers;
+        ];
+        const answers = await inquirer.prompt(questions);
+        return answers;
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 const simpleInquirer = (question, type) => inquirer.prompt([
