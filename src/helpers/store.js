@@ -1,8 +1,10 @@
 const crypto = require('crypto');
-const files = require('./files')
-const config = require('./config')
-const inquirer = require('./inquirer')
-const git = require('./git')
+const files = require('./files');
+const config = require('./config');
+const inquirer = require('./inquirer');
+const git = require('./git');
+const shell = require('./shell')
+
 const getId = () => {
     const def_key = config.get('default_id');
     return def_key
@@ -105,7 +107,10 @@ const addDeploy = async() => {
 
 }
 
+const getInstalledLocation = () => shell.node.run('npm root -g');
+
 module.exports = {
+    getInstalledLocation,
     isDefaultIdSet,
     setDefault,
     addDeploy,
