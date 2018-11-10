@@ -9,24 +9,25 @@ const Spinner = CLI.Spinner;
 
 const log = (text, color = "white") => console.log(chalk[color](text));
 
-const spinner = (msg) => new Spinner(msg)
+const spinner = (msg) => new Spinner(msg);
+
+const logo = () => console.log(chalk.magenta(figlet.textSync('deployer', {horizontalLayout: 'full'})));
 
 const startup = async() => {
     try {
         clear();
-        console.log(chalk.magenta(figlet.textSync('deployer', {horizontalLayout: 'full'})));
+        logo();
         let answer = null;
         let created = null;
+
         const isGit = await git.isThisAgitRepo();
         if (!isGit) {
             answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm');
-            if (answer.value) {
+            if (answer && answer.value) {
                 created = await git.init();
                 if (created) {
                     cli.log('Git repository was initialize.', 'green');
                 }
-            } else {
-                process.exit();
             }
         } else {
             created = true;
@@ -36,6 +37,7 @@ const startup = async() => {
             log(`Current branch #${git_status.current}`, 'yellow');
             log('config path: ' + config.path(), 'gray')
         }
+
     } catch (e) {
         console.error(e);
     }
