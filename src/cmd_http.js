@@ -17,10 +17,7 @@ const run = async(opt,force) => {
             if (!shell.which('pm2')) {
                 shell.echo('This script requires pm2');
                 shell.echo('Trying to install pm2...');
-                shell.exec("npm i -g pm2", (code, output) => {
-                    shell.echo(`pm2 installed ${code}`);
-                  })
-                shell.exit(1)
+                await ns.node.run('npm i -g pm2');
               }
 
              await ns.node.run('pm2 start build/server/index.js -n deployer');
