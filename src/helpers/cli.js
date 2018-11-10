@@ -24,7 +24,7 @@ const startup = async() => {
         if (!isGit) {
             answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm');
             if (answer && answer.value) {
-                created = await git.init();
+                created = await git.init().catch(e=>cli.log('Could not create a git repository.', 'red'));
                 if (created) {
                     cli.log('Git repository was initialize.', 'green');
                 }
