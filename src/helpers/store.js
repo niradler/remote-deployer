@@ -21,6 +21,11 @@ const setDefault = () => {
     config.setKey('default_id',def_key);
      return def_key;
 }
+
+const isDefaultIdSet = () => {
+    let def_key = config.get('default_id');
+    return def_key ? true : false;
+}
     
 const getSSHConnection = async(isNew = false) => {
     const id = getId();
@@ -72,6 +77,7 @@ const addDeploy = async ()=>{
 }
 
 module.exports = {
+    isDefaultIdSet,
     setDefault,
     addDeploy,
     getId,

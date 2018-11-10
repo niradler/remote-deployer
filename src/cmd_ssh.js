@@ -1,32 +1,13 @@
 #!/usr/bin/env node
 
 const cli = require('./helpers/cli');
-const git = require('./helpers/git');
-const inquirer = require('./helpers/inquirer');
 const ssh = require('./helpers/ssh');
 const store = require('./helpers/store');
-const config = require('./helpers/config');
 
 const run = async(opt,force) => {
     try {
         //----------- welcome and init git
-        cli.startup();
-        const isGit = await git.isThisAgitRepo();
-        if (!isGit) {
-            const answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm')
-            if (answer.value) {
-                const created = await git.init();
-                if (created) {
-                    cli.log('Git repository was initialize.', 'green');
-                }
-            } else {
-                process.exit();
-            }
-        }
-        const git_status = await git.status();
-        cli.log(`Current branch #${git_status.current}`, 'yellow');
-        cli.log('config path: ' + config.path(), 'gray')
-        
+        await cli.startup();  
         //-----------
         switch (opt) {
             case 'deploy':

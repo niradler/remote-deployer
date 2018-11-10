@@ -1,38 +1,23 @@
 #!/usr/bin/env node
 
 const cli = require('./helpers/cli');
-const git = require('./helpers/git');
 const inquirer = require('./helpers/inquirer');
 const ssh = require('./helpers/ssh');
 const store = require('./helpers/store');
-const config = require('./helpers/config');
 
 const run = async(force) => {
     try {
         //----------- welcome and init git 
-        cli.startup();
-        let answer = null;
-        const isGit = await git.isThisAgitRepo();
-        if (!isGit) {
-             answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm');
-            if (answer.value) {
-                const created = await git.init();
-                if (created) {
-                    cli.log('Git repository was initialize.','green');
-                }
-            }else{
-                process.exit();
-            }
-
-        }
-        const git_status = await git.status();
-        cli.log(`Current branch #${git_status.current}`,'yellow');
-        cli.log('config path: ' + config.path(),'gray')
+        await cli.startup();
+        let answer = null;   
         //-----------
-         answer = await inquirer.simpleInquirer('Should we create a default key for you (if yes will allow only one configuration)?', 'confirm');
-        if (answer.value) {
-            cli.log('key created: ' + store.setDefault(),'green');
+        if(!store.isDefaultIdSet()){
+            answer = await inquirer.simpleInquirer('Should we create a default key for you (if yes will allow only one configuration)?', 'confirm');
+            if (answer.value) {
+                cli.log('key created: ' + store.setDefault(),'green');
+            }
         }
+
         // new deploy process
          answer = await inquirer.how_to_deploy();
         if(answer.method === 'ssh'){

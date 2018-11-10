@@ -21,7 +21,7 @@ if (!shell.which('npm')) {
 
 program
     .command('init')
-    .option('-f, --force', 'Force override')
+    .option('-f, --force', 'Force reconfigure.')
     .description('Initialise deployer configuration.')
     .action(function (cmd) {
         cmd_init(cmd.force)
