@@ -4,7 +4,7 @@ const cli = require('./helpers/cli');
 const inquirer = require('./helpers/inquirer');
 const ssh = require('./helpers/ssh');
 const store = require('./helpers/store');
-
+const git = require('./helpers/git');
 const run = async(force) => {
     try {
         //----------- welcome and init git 
@@ -17,7 +17,7 @@ const run = async(force) => {
                 cli.log('key created: ' + store.setDefault(),'green');
             }
         }
-
+        await git.check();
         // new deploy process
          answer = await inquirer.how_to_deploy();
         if(answer.method === 'ssh'){

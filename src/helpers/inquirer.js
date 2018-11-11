@@ -130,17 +130,6 @@ const ask_http_conf = async() => {
                         return 'Please enter your api key .';
                     }
                 }
-            }, {
-                name: 'deploy_script',
-                type: 'input',
-                message: 'Set deploy script path:',
-                validate: function (value) {
-                    if (value.length) {
-                        return true;
-                    } else {
-                        return 'Please enter your script path .';
-                    }
-                }
             }
         ];
         const answers = await inquirer.prompt(questions);

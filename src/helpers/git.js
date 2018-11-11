@@ -58,7 +58,31 @@ const status = async() => {
     return statusSummary;
 }
 
+const check = async () =>{
+    let answer = null;
+    let created = null;
+
+    const isGit = await isThisAgitRepo();
+    if (!isGit) {
+        answer = await inquirer.simpleInquirer('Should we create one for you ?', 'confirm');
+        if (answer && answer.value) {
+            created = await init().catch(e=>cli.log('Could not create a git repository.', 'red'));
+            if (created) {
+                cli.log('Git repository was initialize.', 'green');
+            }
+        }
+    } else {
+        created = true;
+    }
+    if (created) {
+        const git_status = await status();
+        log(`Current branch #${git_status.current}`, 'yellow');
+        log('config path: ' + config.path(), 'gray')
+    }
+}
+
 module.exports = {
+    check,
     lastCommit,
     isThisAgitRepo,
     init,

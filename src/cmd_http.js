@@ -33,7 +33,7 @@ const run = async(opt,force) => {
             case 'configure':
                 await store.getHTTPConfig(force);
                 await store.getDeployScriptPath(force);
-                cli.log('Deployment with ssh is configured!', 'green');
+                cli.log('Deployment with http is configured!', 'green');
                 break;
             default:
                 break;
