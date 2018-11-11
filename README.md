@@ -30,6 +30,7 @@ npm i -g remote-deployer
 - on linux and mac, make sure the script as permission, ```chmod +x script.sh```
 - get config file path: ```deployer config path```
 - print config file: ```deployer config all```
+- try running deployer in the project folder. (deployer will interact with git to save release date/data support ssh only)
 
 ### TODO
 
