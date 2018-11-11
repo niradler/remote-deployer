@@ -107,8 +107,20 @@ const addDeploy = async() => {
 
 }
 
-const getInstalledLocation = () => shell.node.run('npm root -g');
-
+const getInstalledLocation = async () => {
+    try {
+        let global_node_modules = config.get('global_node_modules');
+    if (!global_node_modules) {
+        const loc = await shell.native.run('npm root -g');
+        config.setKey('global_node_modules', loc.replace('\n',''));
+        global_node_modules = loc;
+    }
+    return global_node_modules;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
 module.exports = {
     getInstalledLocation,
     isDefaultIdSet,

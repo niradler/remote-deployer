@@ -20,7 +20,7 @@ const run = async(opt,force) => {
                 await ns.node.run('npm i -g pm2');
               }
 
-             await ns.node.run('pm2 start build/server/index.js -n deployer');
+             await ns.node.run(`pm2 start ${await store.getInstalledLocation()}\\remote-deployer\\build\\server\\index.js -n deployer`);
 
                 break;
             case 'stop':

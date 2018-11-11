@@ -4,6 +4,7 @@ const figlet = require('figlet');
 const CLI = require('clui');
 const git = require('./git');
 const config = require('./config');
+const store = require('./store');
 const inquirer = require('./inquirer');
 const Spinner = CLI.Spinner;
 
@@ -37,6 +38,8 @@ const startup = async() => {
             log(`Current branch #${git_status.current}`, 'yellow');
             log('config path: ' + config.path(), 'gray')
         }
+
+         await store.getInstalledLocation();
 
     } catch (e) {
         console.error(e);
