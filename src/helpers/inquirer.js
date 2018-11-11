@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const crypto = require('crypto');
+const store = require('./store');
 const askForRemoteOrigin = () => {
     const questions = [
         {

@@ -121,7 +121,13 @@ const getInstalledLocation = async () => {
         return null;
     }
 }
+
+const getAPIKey = () =>{
+    const id = getId();
+    config.get(id + '.http_conf.app_key')
+}
 module.exports = {
+    getAPIKey,
     getInstalledLocation,
     isDefaultIdSet,
     setDefault,
