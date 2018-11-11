@@ -27,7 +27,7 @@ const run = async () => {
     app.get('/', async (req,res)=> {
         try {
             const script_path =await store.getDeployScriptPath();
-            //windows
+            //windows, linux
             sh.exec("C:\\Users\\admin\\Documents\\deploy.sh", (code, output) => {
                 sh.echo(`Deployment script exit code ${code}`);
               })
