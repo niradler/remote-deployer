@@ -16,7 +16,7 @@ const startup = async() => {
     try {
         clear();
         logo();
-
+        console.log('');
          await store.getInstalledLocation();
 
     } catch (e) {

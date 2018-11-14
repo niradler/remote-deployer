@@ -24,7 +24,7 @@ const run = async () => {
         }
     })
     // API Routes
-    app.get('/', async (req,res)=> {
+    app.get('/deploy', async (req,res)=> {
         try {
             const script_path =await store.getDeployScriptPath();
             //windows, linux
