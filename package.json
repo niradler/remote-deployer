@@ -15,7 +15,7 @@
     "node": ">=8.0.0"
   },
   "bin": {
-    "deployer": "build/index.js"
+    "deployer": "build/deployer.js"
   },
   "bugs": "https://github.com/niradler/remote-deployer/issues",
   "homepage": "https://github.com/niradler/remote-deployer",
@@ -23,7 +23,9 @@
     "remote-deployer",
     "deployer",
     "ssh",
-    "deploy"
+    "http",
+    "deploy",
+    "deployment"
   ],
   "license": "MIT",
   "dependencies": {
