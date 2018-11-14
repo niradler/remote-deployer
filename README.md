@@ -32,6 +32,7 @@ npm i -g remote-deployer
 - print config file: ```deployer config all```
 - try running deployer in the project folder. (deployer will interact with git to save release date/data support ssh only)
 - trigger example for deployer http: ```curl http://api.site.site:1234/deploy?appKey=bdd110130eg51a5e8ac15b829e336f7710e3ba71```
+- read the blog (post)[https://niradler.com/introduction-remote-deployer/].
 
 ### TODO
 
