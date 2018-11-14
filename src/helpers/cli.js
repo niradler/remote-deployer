@@ -27,5 +27,6 @@ const startup = async() => {
 module.exports = {
     log,
     startup,
-    spinner
+    spinner,
+    logo
 }

@@ -156,5 +156,6 @@ program.on('--help', function () {
 program.parse(process.argv);
 
 if (process.argv.length < 3) {
+    cli.logo();
     program.help();
 }
