@@ -29,6 +29,7 @@ const run = async(force) => {
         }else if(answer.method === 'http') {
             // are you on the server ?
             await store.getHTTPConfig(force);
+            await store.getDeployScriptPath(force);
             cli.log('Deployment with http is configured!','green');
         }
 
